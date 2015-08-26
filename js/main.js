@@ -145,7 +145,7 @@ window.onload=function(){
             win.changeIndex();//防止滑出页面
             win.animate();
             //阻止默认事件
-            return false
+            e.preventDefault();
         },
         changeIndex:function(){
             nextIndex=nextIndex>=page.length?page.length-1:nextIndex;//滑动到最后一屏,锁定在最后一屏不再向下滑动
@@ -156,9 +156,10 @@ window.onload=function(){
     win.changePageHeight();
     win.ScrollEvent(document);
     window.onresize=function(){//浏览器窗口尺寸发生变化时自动修正页面的尺寸
-        win.changeBodyHeight();
-        win.changePageHeight();
-
-        wrap.style.top= -(nextIndex*h)+"px"
+        setTimeout(function(){
+            win.changeBodyHeight();
+            win.changePageHeight();
+            wrap.style.top= -(nextIndex*h)+"px"
+        },500);
     }
 };
